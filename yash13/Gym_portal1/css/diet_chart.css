@@ -1,0 +1,8 @@
+.bg-howitworks {
+    background-image: url('../images/85.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    background-attachment: fixed;
+}

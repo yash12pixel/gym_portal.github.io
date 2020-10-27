@@ -1,0 +1,17 @@
+.navbar {
+    padding: 0rem 7rem !important;
+}
+.navbar ul li a:hover{
+	background: #f00;
+}
+.nav-link {
+    font-family: 'Teko', sans-serif;
+    font-size: 22px;
+    color: #111 !important;
+    margin-right: 200px;
+    text-align: right;
+}
+
+.bg-light {
+    background-color: #fff !important;
+}

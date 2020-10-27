@@ -1,0 +1,96 @@
+.navbar {
+    padding: 0rem 7rem !important;
+}
+ .navbar ul li a:hover{
+	background: #f00;
+} 
+.nav-link {
+    font-family: 'Teko', sans-serif;
+    font-size: 20px;
+    color: #111 !important;
+    margin-right: 15px;
+    text-align: right;
+}
+
+.bg-light {
+    background-color: #fff !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Teko', sans-serif;
+}
+
+.section {
+    padding-top: 54px;
+    padding-bottom: 54px;
+}
+
+.underline {
+    width: 100px;
+    height: 4px;
+    background-color: red;
+}
+
+p {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.text-red {
+    color: red;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.bg-f2f2f2 {
+    background-color: #f2f2f2;
+}
+
+.underline1 {
+    width: 100px;
+    height: 4px;
+    background-color: red;
+}
+
+.underline2 {
+    width: 100px;
+    height: 4px;
+    background-color: red;
+}
+
+.readmore {
+    color: red !important;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.bg-howitworks {
+    background-image: url('../images/17.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    background-attachment: fixed;
+}
+
+.card-text {
+    font-size: 15px;
+}
+
+.testi-image img {
+    width: 14% !important;
+}
+
+.underline3 {
+    width: 120px;
+    height: 4px;
+    background-color: red;
+}
