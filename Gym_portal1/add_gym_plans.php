@@ -380,7 +380,9 @@ if (isset($_POST["submit"]))
   <script src="js_view_gym/jquery.magnific-popup.min.js"></script>
   <script src="js_view_gym/bootstrap-datepicker.min.js"></script>
   <script src="js_view_gym/aos.js"></script>
-
+  <script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/dist/jquery.validate.js"></script>
+  <script type="text/javascript" src="js/plan_validation.js"></script>
   <script src="js_view_gym/main.js"></script>
 </body>
 </html>

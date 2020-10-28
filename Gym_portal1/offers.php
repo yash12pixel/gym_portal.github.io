@@ -385,6 +385,9 @@ $gym_id=$rows['gym_id'];
   <script src="js_view_gym/jquery.magnific-popup.min.js"></script>
   <script src="js_view_gym/bootstrap-datepicker.min.js"></script>
   <script src="js_view_gym/aos.js"></script>
+  <script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/dist/jquery.validate.js"></script>
+<script type="text/javascript" src="js/offer-validation.js"></script>
 
   <script src="js_view_gym/main.js"></script>      
     </body>
