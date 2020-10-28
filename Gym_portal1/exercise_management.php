@@ -39,8 +39,8 @@ $gym_id=$rows['gym_id'];
 //     //Offer name validation
 //      if(empty($_POST['txtexnm']))
 //     {
-//         $_SESSION['status'] = "Plz Select Offer Name";
-//         header('Location:offers.php'); 
+//         $_SESSION['status'] = "Plz type Exercise Name";
+//         header('Location:exercise_management.php'); 
 //     }
 //     else
 //     {
@@ -49,45 +49,45 @@ $gym_id=$rows['gym_id'];
 //     //plan validation
 //      if($_POST['exercise_type']=='')
 //     {
-//         $_SESSION['status'] = "Plz Choose Plan Name";
-//         header('Location:offers.php'); 
+//         $_SESSION['status'] = "Plz Choose Exercise Type";
+//         header('Location:exercise_management.php'); 
 //     }
 //     else
 //     {
 //         $exercise_type=$_POST['exercise_type'];
-//         echo $plan;
+//         echo $exercise_type;
 //     }
     
 //     //Offer percentage
-//     if (empty($_POST['txtper']))
+//     if (empty($_POST['txtdesc']))
 //     {
-//         $_SESSION['status'] = "Plz Add Offer Percentage";
-//         header('Location:offers.php'); 
+//         $_SESSION['status'] = "Plz Add Exercise Description";
+//         header('Location:exercise_management.php'); 
 //     }
 
-//     if (empty($_POST['txtper']))
+//     else
 //     {
-//         $_SESSION['status'] = "Plz Add Offer Percentage";
-//         header('Location:offers.php'); 
+//         $desc=$_POST['txtdesc'];
+//         echo $desc;
 //     }
   
-//      if (!empty($Offername) && !empty($Plan)&& !empty($percentage) && $ChkPlan=true)
+//      if (!empty($exercisename) && !empty($txtdesc)&& !empty($exercise_type) && $ChkPlan=true)
 //     {
 
     
 //             //$sql="insert into plan(plan_type,plan_price,gym_id,plan_duration) values ('$plan_name',$price,'$gym_id','$plan_duration')";
-//             $sql1 = "INSERT INTO `gym_offers`(`plan_id`, `gym_id`, `offer_percentage`, `offer_name`) VALUES('$Plan','$gym_id','$percentage','$Offername')";
+//             $sql1 = "INSERT INTO `gym_exercise`(`gym_exercise_type`, `gym_exercise_name	`, `gym_exercise_desc`, `gym_id`) VALUES('$exercise_type','$exercisename','$txtdesc','$gym_id')";
 //             $result = mysqli_query($con, $sql1);
 //             if ($result)
 //             {
 //                 $_SESSION['success'] = "Offer Added Successfully";
-//                 header('Location:offers.php'); 
+//                 header('Location:exercise_management.php'); 
 //             } 
 //             else 
 //             {
 //                 // echo "<script>alert('Something went wrong');</script>";
 //                 $_SESSION['status'] = "Offer Not Added Something Went Wrong..";
-//                 header('Location:offers.php'); 
+//                 header('Location:exercise_management.php'); 
 //             }
 
 //     }
@@ -96,24 +96,24 @@ $gym_id=$rows['gym_id'];
 
 
 
-if(isset($_POST['btn_delete']))
-{
-    $delete_id = $_POST['delete_id'];
+// if(isset($_POST['btn_delete']))
+// {
+//     $delete_id = $_POST['delete_id'];
 
-    $que = "DELETE FROM trainer_gym WHERE trainer_id = '$delete_id'";
-    $run = mysqli_query($con,$que);
+//     $que = "DELETE FROM trainer_gym WHERE trainer_id = '$delete_id'";
+//     $run = mysqli_query($con,$que);
 
-    if($run)
-    {
-         $_SESSION['success'] = "Your Data is Deleted";
-         header('Location:gym_trainer.php');   
-    }
-    else
-    {
-         $_SESSION['status'] = "Your Data is Not Deleted";
-         header('Location:gym_trainer.php');    
-    }
-}
+//     if($run)
+//     {
+//          $_SESSION['success'] = "Your Data is Deleted";
+//          header('Location:gym_trainer.php');   
+//     }
+//     else
+//     {
+//          $_SESSION['status'] = "Your Data is Not Deleted";
+//          header('Location:gym_trainer.php');    
+//     }
+// }
 
     ?>
         
@@ -229,19 +229,19 @@ if(isset($_POST['btn_delete']))
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="Offer" action="" method="post" enctype="multipart/form-data">
+      <form id="Exercise_manage" action="add_gym_exercise_management.php" method="post">
     <div class="modal-body">
 
         <div class="form-group">
             <label>Exercise Type:</label>
-            <!-- <input type="text" name="txtnm" id = "txtnm" class="form-control" placeholder="Enter Triner Name"> -->
+            <!-- <input type="text" name="exercise_type" id = "exercise_type" class="form-control" placeholder="Enter Triner Name"> -->
             <select name="exercise_type">
             <option>--Select Exercise Type--</option>
-            <option value="flaticon-padmasana">Yoga</option>
-            <option value="flaticon-weight">Weight Lifiting</option>
-            <option value="flaticon-boxing-gloves">Boxing</option>
-            <option value="flaticon-running">Running</option>
-            <option value="flaticon-spinning">Cardio</option>
+            <option value="yoga">Yoga</option>
+            <option value="weight_lifting">Weight Lifiting</option>
+            <option value="boxing">Boxing</option>
+            <option value="running">Running</option>
+            <option value="cardio">Cardio</option>
             </select>
 
         </div>
@@ -420,7 +420,9 @@ if(isset($_POST['btn_delete']))
   <script src="js_view_gym/jquery.magnific-popup.min.js"></script>
   <script src="js_view_gym/bootstrap-datepicker.min.js"></script>
   <script src="js_view_gym/aos.js"></script>
-
+  <script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/dist/jquery.validate.js"></script>
+<script type="text/javascript" src="js/dist/exercise_manage.min.js"></script>
   <script src="js_view_gym/main.js"></script>    
     </body>
 </html>
