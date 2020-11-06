@@ -6,7 +6,7 @@
 include 'connection.php';
 
 $user_username=$_SESSION['username'];
-// $gym_id=$_GET['id'];
+$gym_id=$_GET['id'];
 //join query for gym and gym owner detailes
 $sql = "SELECT * FROM gym_owner as g inner join gyms as gm on g.gym_owner_id=gm.gym_owner_id where username='$user_username' or email='$user_username'";
 $result = mysqli_query($con,$sql) or die(mysqli_error($con)); 

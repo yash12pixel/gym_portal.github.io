@@ -116,7 +116,7 @@ $gym_id=$rows['gym_id'];
                         <a href="#">View</a>
                         <ul class="dropdown arrow-top">
                           <li><a href="view_members.php">View Members</a></li>
-                          <li><a href="view_gym_video.php">View Videoes</a></li>
+                          <li><a href="view_gym_video.php?id=<?php echo $gym_id; ?>">View Videoes</a></li>
                         </ul>
                       </li>
 			                <!-- <li><a href="view_members.php">View Members</a></li> -->
@@ -382,11 +382,9 @@ if($check)
  
       <div class="col-lg-4 mb-4">
         <div class="block-trainer">
-        
           <img src="gym_trainer_and_Certificate/<?php echo $row['image']; ?>" alt="Image" height="100px" class="img-fluid">
-          
           <div class="block-trainer-overlay">
-            <a class="text-center" href="view_gym_video.php" style="font-size:25px; text-align:center;"><?php echo $row['trainer_name']; ?></a>
+            <h2 class="text-center" style="font-size:25px; text-align:center;"><?php echo $row['trainer_name']; ?></h2>
             <p class="text-white" style="font-size:15px;"><?php echo $row['trainer_description']; ?></p>
             <p style="font-size:15px;">
               <!-- <a href="#" class="p-2"><span class="icon-facebook"></span></a>
@@ -398,8 +396,7 @@ if($check)
             <a>exp:- <?php echo $row['trainer_experience']; ?> years</a>
             </p>
           </div>
-        </div>   
-         
+        </div>    
       </div>
  
  

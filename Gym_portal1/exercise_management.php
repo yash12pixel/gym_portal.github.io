@@ -381,7 +381,7 @@ $gym_id=$rows['gym_id'];
                      </td>      -->
 
                       <td>
-                        <form action="" method="post">
+                        <form action="add_gym_exercise_management.php" method="post">
                           <input type="hidden" name="delete_id" value="<?php echo $row['gym_exercise_id']; ?>">
                         <button type="submit" name="btn_delete" class="btn btn-danger">Delete</button>
                         </form>
