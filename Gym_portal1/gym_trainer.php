@@ -11,192 +11,11 @@ $rows = mysqli_fetch_array($result);
 $gym_id=$rows['gym_id'];
 
 
-// //form data variables
-// $plan=$percentage=$Offername="";
-// $ChkPlan=false;
-// //error variables
-// $PlanErr=$perErr=$OffernameErr=$ChkErr="";     
-     
-// //Check if offer for plan already exists
-//   $ChkSQL="Select * from gym_offers o inner join plan p on p.plan_id=o.plan_id where o.gym_id='$gym_id'";
-//   $ChkRes= mysqli_query($con, $ChkSQL);
-//   $ChkNum= mysqli_num_rows($result);
-
-// if (isset($_POST["submit"])) 
-// {
-    
-//     //Check if offer for plan already exists
-//     if($ChkNum!=0)
-//     {
-//         $_SESSION['status'] = "Plan Already Exist";
-//         header('Location:offers.php'); 
-//     }
-//     else
-//     {
-//         $ChkPlan=true;
-//     }
-
-//     //Offer name validation
-//      if(empty($_POST['txtnm']))
-//     {
-//         $_SESSION['status'] = "Plz Select Offer Name";
-//         header('Location:offers.php'); 
-//     }
-//     else
-//     {
-//         $Offername=$_POST['txtnm'];
-//     }
-//     //plan validation
-//      if($_POST['Sel_plan']=='')
-//     {
-//         $_SESSION['status'] = "Plz Choose Plan Name";
-//         header('Location:offers.php'); 
-//     }
-//     else
-//     {
-//         $Plan=$_POST['Sel_plan'];
-//         echo $plan;
-//     }
-    
-//     //Offer percentage
-//     if (empty($_POST['txtper']))
-//     {
-//         $_SESSION['status'] = "Plz Add Offer Percentage";
-//         header('Location:offers.php'); 
-//     }
-//     else
-//     {
-//         if(!is_numeric($_POST['txtper']))
-//         {
-//             $_SESSION['status'] = "Only numeric value Allowed.";
-//             header('Location:offers.php'); 
-//         }
-//         else
-//         {
-//             if($_POST['txtper']>0 && $_POST['txtper'] <=30)
-//             {
-//                 $percentage=trim($_POST["txtper"]);
-//             }
-//             else
-//             {
-//                 $_SESSION['status'] = "Plz Add Offer Percentage Ratio Between 1 to 30...";
-//                 header('Location:offers.php'); 
-//             }
-//         }
-       
-//     }
-//      if (!empty($Offername) && !empty($Plan)&& !empty($percentage) && $ChkPlan=true)
-//     {
-
-    
-//             //$sql="insert into plan(plan_type,plan_price,gym_id,plan_duration) values ('$plan_name',$price,'$gym_id','$plan_duration')";
-//             $sql1 = "INSERT INTO `gym_offers`(`plan_id`, `gym_id`, `offer_percentage`, `offer_name`) VALUES('$Plan','$gym_id','$percentage','$Offername')";
-//             $result = mysqli_query($con, $sql1);
-//             if ($result)
-//             {
-//                 $_SESSION['success'] = "Offer Added Successfully";
-//                 header('Location:offers.php'); 
-//             } 
-//             else 
-//             {
-//                 // echo "<script>alert('Something went wrong');</script>";
-//                 $_SESSION['status'] = "Offer Not Added Something Went Wrong..";
-//                 header('Location:offers.php'); 
-//             }
-
-//     }
-// }   
-// ?>
-
-<?php
-//session_start();
-//include('connection.php');
-//include('security.php');
-// $user_username=$_SESSION['username'];
-// $sql = "SELECT * FROM gym_owner as g inner join gyms as gm on g.gym_owner_id=gm.gym_owner_id where username='$user_username' or email='$user_username'";
-// $result = mysqli_query($con,$sql) or die(mysqli_error($con)); 
-// $rows = mysqli_fetch_array($result);
-// $gym_id=$rows['gym_id'];
- 
-    if(isset($_POST['submit'])){
-
-        if(file_exists("gym_trainer_and_Certificate/".$_FILES['image']['name']))
-      {
-          $store = $_FILES['image']['name'];
-          $_SESSION['status'] = " Image already exist. '.$store.'";
-           header("location: gym_trainer.php");
-      }
-
-      
-else{
-
-        $name = $_FILES['image']['name'];
-        $trainer_name = $_POST['txtnm'];
-        $trainer_age = $_POST['txtage'];
-        $trainer_exp = $_POST['txtexperiance'];
-        $trainer_desc = $_POST['txtdesc'];
-        $target_dir = "gym_trainer_and_Certificate/";
-        $target_file = $target_dir . basename($_FILES["image"]["name"]);
-
-        // Select file type
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-        // Valid file extensions
-        $extensions_arr = array("jpg","jpeg","png","gif");
-
-        // Check extension
-        if( in_array($imageFileType,$extensions_arr) ){
-            
-            // Convert to base64 
-            // $image_base64 = base64_encode(file_get_contents($_FILES['image']['tmp_name']) );
-            //$image = 'data:image/'.$imageFileType.';base64,'.$image_base64;
-
-            // Insert record
-            $query = "insert into trainer_gym (trainer_name,trainer_age,trainer_experience,trainer_description,image,gym_id) values ('".$trainer_name."','".$trainer_age."','".$trainer_exp."','".$trainer_desc."','".$name."','".$gym_id."')";
-           
-           $run = mysqli_query($con,$query);
-            if($run){
-                $_SESSION['success'] = "Trainer Info Added";
-                header("Location:gym_trainer.php");
-            }
-            else{
-                $_SESSION['status'] = "Trainer Info Not Added";
-                header("Location:gym_trainer.php");
-            }
-            // Upload file
-            move_uploaded_file($_FILES['image']['tmp_name'],'gym_trainer_and_Certificate/'.$name);
-
-        }
-    
-    }
-
-}
-
-if(isset($_POST['btn_delete']))
-{
-    $delete_id = $_POST['delete_id'];
-
-    $que = "DELETE FROM trainer_gym WHERE trainer_id = '$delete_id'";
-    $run = mysqli_query($con,$que);
-
-    if($run)
-    {
-         $_SESSION['success'] = "Your Data is Deleted";
-         header('Location:gym_trainer.php');   
-    }
-    else
-    {
-         $_SESSION['status'] = "Your Data is Not Deleted";
-         header('Location:gym_trainer.php');    
-    }
-}
-
-    ?>
-        
+?>
 
 <html>
     <head>
-        <title>Add Trainer</title>
+        <title>Add Offers</title>
         <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -239,18 +58,6 @@ if(isset($_POST['btn_delete']))
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         
-        <script>
-        $(document).ready(function(){
-            var id = 1;
-            $("#moreImg").click(function(){
-                var showId = ++id;
-                if(showId <=10)
-                {
-                    $(".input-files").append('<br><input type="file" name="image_upload-'+showId+'">');
-                }
-            });
-        });
-    </script>
     </head>
     <body>
     <div class="site-wrap">
@@ -321,7 +128,7 @@ if(isset($_POST['btn_delete']))
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form  action="add_gym_trainers.php" method="post" enctype="multipart/form-data" id="AddTrainer">
+      <form id="Offer" action="add_gym_trainers.php" method="post" enctype="multipart/form-data">
     <div class="modal-body">
 
         <div class="form-group">
@@ -349,19 +156,19 @@ if(isset($_POST['btn_delete']))
             <input type="file" name="image" id = "image" class="form-control" placeholder="Upload Trainer Profile Image">
         </div>
 
-       <!-- <div class="form-group">
+        <!-- <div class="form-group">
         <div class="input-files">
         <label>Trainer Certificates:</label><br>
         <a id="moreImg"><img src="images/add_icon2.png"> Click here to add more certificate</a>
         <input type="file" name="image_upload-1">
-        </div> 
-        </div>-->
+        </div>
+        </div> -->
 
       </div>
     
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <input type="submit" name="submit" value='Add Trainer' class="btn btn-primary">
+        <button type="submit" name="submit" value='Add' class="btn btn-primary">Add Trainer</button>
       </div>
     </div>
   </div>
@@ -449,8 +256,7 @@ if(isset($_POST['btn_delete']))
                           <th class="text-center">Trainer Experiance</th>
                           <th class="text-center">Trainer Description</th>
                           <!-- <th class="text-center">Edit</th> -->
-                          <th class="text-center">Edit</th>
-                          <th class="text-center">Delete</th>
+                          <th class="text-center">Action</th>
                         </tr>
                       </thead>
 
@@ -471,16 +277,12 @@ if(isset($_POST['btn_delete']))
                       <td><?php echo $row['trainer_experience']." Years"; ?></td>
                       <td><?php echo $row['trainer_description'] ?></td>
                      
-                     <td>
-                         <a href="Edit_Gym_Trainer.php?id=<?php echo $row['trainer_id']; ?>" class="btn btn-success">Edit</a>
-                         <!-- 
+                     <!-- <td>
                           <form action="Edit_Gym_Trainer.php" method="post">
                             <input type="hidden" name="edit_id" value="<?php echo $row['trainer_id']; ?>">
                             <button type="submit" name="btn_edit" class="btn btn-success">Edit</button>
                           </form>
-                         --> 
-                     </td> 
-                      
+                     </td>      -->
 
                       <td>
                         <form action="" method="post">
@@ -504,14 +306,14 @@ if(isset($_POST['btn_delete']))
       </div>
 
           
-
-
-      <script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+         <script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/dist/jquery.validate.js"></script>
-<script type="text/javascript" src="js/trainer-validation.js"></script>
-
-      <script src="js_view_gym/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/trainer_validation.js"></script>
+         <script src="js_view_gym/jquery-3.3.1.min.js"></script>
   <script src="js_view_gym/jquery-migrate-3.0.1.min.js"></script>
+
+
   <script src="js_view_gym/jquery-ui.js"></script>
   <script src="js_view_gym/popper.min.js"></script>
   <script src="js_view_gym/bootstrap.min.js"></script>
@@ -521,11 +323,7 @@ if(isset($_POST['btn_delete']))
   <script src="js_view_gym/jquery.magnific-popup.min.js"></script>
   <script src="js_view_gym/bootstrap-datepicker.min.js"></script>
   <script src="js_view_gym/aos.js"></script>
-  <script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
-<script type="text/javascript" src="js/dist/jquery.validate.js"></script>
-<script type="text/javascript" src="js/Trainer_validation.js"></script>
 
-  <script src="js_view_gym/main.js"></script>      
-    </body> 
+  <script src="js_view_gym/main.js"></script>    
     </body>
 </html>

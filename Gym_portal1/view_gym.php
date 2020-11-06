@@ -5,7 +5,6 @@ include('include/header.php');
 
 
 $BMI=$MEMBERSHIP_TYPE=$customer_id='';
-
 if(isset($_SESSION['username']))
 {
     $user= $_SESSION['username'];
@@ -193,7 +192,15 @@ Swal.fire({
                         <a href="#plans">Plans</a>
                       </li>
                       <li><a href="#trainer">Trainers</a></li>
-                      <li><a href="#gallery">Gallery</a></li>
+                       <li><a href="#gallery">Gallery</a></li>
+                      <!-- <li><a href="view_gym_video.php">Video</a></li> --> 
+                      <!-- <li class="has-children">
+                        <a href="#">Add</a>
+                        <ul class="dropdown arrow-top">
+                          <li><a href="#gallery">Gallery</a></li>
+                          <li><a href="view_gym_video.php">Video</a></li>
+                        </ul>
+                      </li> -->
                       <li><a href="#rating">Ratting & Feddback</a></li>
                       
                       <li><a href="#contact_gym">Contact Gym</a></li>
@@ -254,7 +261,7 @@ Swal.fire({
             }
             ?></p>
             
-               <p><a href="view_gym_video.php" class="btn btn-primary pill px-4">Watch Video</a></p>
+               <p><a href="view_gym_video_cus.php?id=<?php echo $gym_id; ?>" class="btn btn-primary pill px-4">Watch Video</a></p>
 
           </div>
           <div class="col-md-12 col-lg-6 ml-auto">

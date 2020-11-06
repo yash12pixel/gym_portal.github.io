@@ -44,31 +44,12 @@ if (isset($_POST["btnlogin"]))
     $result2=mysqli_query($con,$query2);
     $rows = mysqli_num_rows($result);
     $rows2=mysqli_num_rows($result2);
-    if($rows==1 || $rows2==1)
+    if($rows==1)
     {
-        $rw=mysqli_fetch_assoc($result);
-        $row=$rw['customer_id'];
-        $sql_mem="SELECT * FROM customer c INNER JOIN customer_membership cm ON c.customer_id=cm.customer_id inner join gyms g on g.gym_id=cm.gym_id WHERE c.customer_id=$row";
-        $result_mem = mysqli_query($con,$sql_mem);
-        $rows_mem = mysqli_num_rows($result_mem);
-        if($rows_mem != 0)
-        {
-            $rw=mysqli_fetch_assoc($result_mem);
-            $id=$rw['gym_id'];
-            $_SESSION['username'] = $username;
-            $_SESSION['user_type'] = 'Already_customer';
-            // Redirect user to index.php
-        header("Location: view_gym.php?id=$id");
-            
-        }
-        else
-        {
-              
         $_SESSION['username'] = $username;
         $_SESSION['user_type'] = 'customer';
             // Redirect user to index.php
         header("Location: index.php");
-        }
     }
     else if($rows2==1)
     {
