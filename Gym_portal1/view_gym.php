@@ -1,10 +1,11 @@
 <?php 
 include 'connection.php';
 include('include/header.php');
-include('include/navbar.php');
+// include('include/navbar.php');
 
 
 $BMI=$MEMBERSHIP_TYPE=$customer_id='';
+
 if(isset($_SESSION['username']))
 {
     $user= $_SESSION['username'];
@@ -24,6 +25,7 @@ $gym_id=$_GET['id'];
 $sql="select * from gyms as g inner join gym_owner as go on g.gym_owner_id=go.gym_owner_id where gym_id=$gym_id";
 $result = mysqli_query($con,$sql);
 $rows = mysqli_fetch_array($result);
+$gym_id=$rows['gym_id'];
 //include('include/slider.php');
 ?>
 <!DOCTYPE html>
@@ -44,9 +46,9 @@ and open the template in the editor.
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500"> 
     <link rel="stylesheet" href="fonts/icomoon/style.css">
-
+<!-- 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
 <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css_view_gym/bootstrap.min.css">
@@ -185,9 +187,12 @@ Swal.fire({
                         <a href="#">Home</a>
                       </li>
                       <li>
-                        <a href="#plans">Plans</a>
-                       
+                        <a href="#exercise">Exercise</a>
                       </li>
+                      <li>
+                        <a href="#plans">Plans</a>
+                      </li>
+                      <li><a href="#trainer">Trainers</a></li>
                       <li><a href="#gallery">Gallery</a></li>
                       <li><a href="#rating">Ratting & Feddback</a></li>
                       
@@ -249,7 +254,8 @@ Swal.fire({
             }
             ?></p>
             
-            
+               <p><a href="view_gym_video.php" class="btn btn-primary pill px-4">Watch Video</a></p>
+
           </div>
           <div class="col-md-12 col-lg-6 ml-auto">
               <?php
@@ -270,8 +276,68 @@ Swal.fire({
     </div>
     </section> 
     
+<!-- exercise management start -->
+<section id="exercise">
+<div class="border-bottom">
+<div class="heading-with-border mt-5 text-center">
+          <h2 class="heading text-uppercase">Exercises</h2>
+        </div>
+      <div class="row no-gutters">
 
+      <?php
+        $query_exercise = "select * from gym_exercise where gym_id = '$gym_id'";
+        $run = mysqli_query($con,$query_exercise);
+        $check = mysqli_num_rows($run) > 0;
+
+        if($check)
+        {
+            while($row = mysqli_fetch_array($run))
+            {
+              ?>
+                  <div class="col-md-6 col-lg-3">
+          <div class="w-100 h-100 block-feature p-5 bg-light">
+            <span class="d-block mb-2 mt-2">
+              <!-- <span class="flaticon-padmasana display-4"></span> -->
+             
+              <h1>
+              <?php
+                  if($row['gym_exercise_type'] == "yoga")
+                  {
+                    echo"<span class='flaticon-padmasana display-4'></span>";
+                  }
+                  else if($row['gym_exercise_type'] == "weight_lifting")
+                  {
+                    echo"<span class='flaticon-weight display-4'></span>";
+                  }
+                  else if($row['gym_exercise_type'] == "boxing")
+                  {
+                    echo"<span class='flaticon-boxing-gloves display-4'></span>";
+                  }
+                  else if($row['gym_exercise_type'] == "running")
+                  {
+                    echo"<span class='flaticon-running display-4'></span>";
+                  }
+                  else if($row['gym_exercise_type'] == "cardio")
+                  {
+                    echo"<span class='flaticon-spinning display-4'></span>";
+                  }
+              ?>
+              </h1>
+            </span>
+            <h2 class="mt-2 mb-2"><?php echo $row['gym_exercise_name']; ?></h2>
+            <p ><?php echo $row['gym_exercise_desc']; ?></p>
+          </div>
+        </div>
+              <?php
+            }
+        }
+        else{
+          echo"no records available";
+        }
+      ?>
     
+    </section>
+
    <section id="plans">
    <div class="site-section">        
       <div class="container">         
@@ -445,6 +511,63 @@ Swal.fire({
       </div>
     </div>
     </section>
+ <!-- trainer start -->
+ <section id="trainer">
+ <div class="site-section bg-light">
+
+<div class="container">
+  
+  <div class="heading-with-border text-center mb-5">
+    <h2 class="heading text-uppercase" style="font-size:22px;">Experts Trainer</h2>
+  </div>   
+  <div class="row">
+<?php
+
+$query_trainer = "SELECT * FROM trainer_gym WHERE gym_id = '$gym_id'";
+$run = mysqli_query($con,$query_trainer);
+$check = mysqli_num_rows($run) > 0;
+
+if($check)
+{
+    while($row = mysqli_fetch_array($run))
+    {
+      ?>
+
+ 
+      <div class="col-lg-4 mb-4">
+        <div class="block-trainer">
+          <img src="gym_trainer_and_Certificate/<?php echo $row['image']; ?>" alt="Image" height="100px" class="img-fluid">
+          <div class="block-trainer-overlay">
+            <h2 class="text-center" style="font-size:25px; text-align:center;"><?php echo $row['trainer_name']; ?></h2>
+            <p class="text-white" style="font-size:15px;"><?php echo $row['trainer_description']; ?></p>
+            <p style="font-size:15px;">
+              <!-- <a href="#" class="p-2"><span class="icon-facebook"></span></a>
+              <a href="#" class="p-2"><span class="icon-twitter"></span></a>
+              <a href="#" class="p-2"><span class="icon-instagram"></span></a> -->
+              <a>age:- <?php echo $row['trainer_age']; ?> years</a>
+            </p>
+            <p style="font-size:15px;">
+            <a>exp:- <?php echo $row['trainer_experience']; ?> years</a>
+            </p>
+          </div>
+        </div>    
+      </div>
+ 
+ 
+      <?php
+    }
+}
+else
+{
+  echo "no record found";
+}
+
+?>
+   </div>
+</div>
+</div>
+</section>
+
 
     <section id="gallery"></section>   
 <div class="site-section">
@@ -777,61 +900,7 @@ Swal.fire({
 
      </div>
 
-     <!-- trainer start -->
-     <div class="site-section bg-light">
-
-<div class="container">
-  
-  <div class="heading-with-border text-center mb-5">
-    <h2 class="heading text-uppercase" style="font-size:22px;">Experts Trainer</h2>
-  </div>   
-  <div class="row">
-<?php
-
-$query_trainer = "SELECT * FROM trainer_gym WHERE gym_id = '$gym_id'";
-$run = mysqli_query($con,$query_trainer);
-$check = mysqli_num_rows($run) > 0;
-
-if($check)
-{
-    while($row = mysqli_fetch_array($run))
-    {
-      ?>
-
- 
-      <div class="col-lg-4 mb-4">
-        <div class="block-trainer">
-          <img src="gym_trainer_and_Certificate/<?php echo $row['image']; ?>" alt="Image" height="100px" class="img-fluid">
-          <div class="block-trainer-overlay">
-            <h2 class="text-center" style="font-size:25px; text-align:center;"><?php echo $row['trainer_name']; ?></h2>
-            <p class="text-white" style="font-size:15px;"><?php echo $row['trainer_description']; ?></p>
-            <p style="font-size:15px;">
-              <!-- <a href="#" class="p-2"><span class="icon-facebook"></span></a>
-              <a href="#" class="p-2"><span class="icon-twitter"></span></a>
-              <a href="#" class="p-2"><span class="icon-instagram"></span></a> -->
-              <a>age:- <?php echo $row['trainer_age']; ?> years</a>
-            </p>
-            <p style="font-size:15px;">
-            <a>exp:- <?php echo $row['trainer_experience']; ?> years</a>
-            </p>
-          </div>
-        </div>    
-      </div>
- 
- 
-      <?php
-    }
-}
-else
-{
-  echo "no record found";
-}
-
-?>
-   </div>
-</div>
-</div>
-
+    
 
 
 

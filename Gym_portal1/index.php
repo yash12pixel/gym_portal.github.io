@@ -1,7 +1,15 @@
 <?php include('include/header.php');  ?>
 <?php include('include/navbar.php');  ?>
 <?php include('include/slider.php'); 
-
+//echo $_SESSION['user_type'];
+if(isset($_SESSION['user_type']))
+{
+    if($_SESSION['user_type']== 'Already_customer')
+    {
+        session_destroy();
+        //exit(header("location:login.php"));
+    }
+}
 
 ?>
 <html>

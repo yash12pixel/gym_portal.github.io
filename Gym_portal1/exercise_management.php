@@ -341,21 +341,19 @@ $gym_id=$rows['gym_id'];
                 <div class="card-body">
             <br>
             
-            <h2 class="text-center"> Your Trainers </h2>
+            <h2 class="text-center"> Your Gym Exercises </h2>
       <div class="table-responsive">
       <?php 
                      //   $sql2="Select offer_id,offer_percentage,offer_name,plan_type from gym_offers o inner join plan p on p.plan_id=o.plan_id where o.gym_id='$gym_id'";
-                          $sql2 = "select * from trainer_gym where gym_id = '$gym_id'";
+                          $sql2 = "select * from gym_exercise where gym_id = '$gym_id'";
                         $result= mysqli_query($con, $sql2);
                         ?>
       <table class="table table-bordered table-striped table-hover table-responsive-lg " width="100%" cellspacing="0" style="background-color: white;">
           <thead class="table table-dark">
                         <tr class="bg-dark text-white text-center">
-                          <th class="text-center">Trainer Name</th>
-                          <th class="text-center">Trainer Age</th>
-                          <th class="text-center">Trainer Image</th>
-                          <th class="text-center">Trainer Experiance</th>
-                          <th class="text-center">Trainer Description</th>
+                          <th class="text-center">Exercise Type</th>
+                          <th class="text-center">Exercise Name</th>
+                          <th class="text-center">Exercise Description</th>
                           <!-- <th class="text-center">Edit</th> -->
                           <th class="text-center">Action</th>
                         </tr>
@@ -367,16 +365,13 @@ $gym_id=$rows['gym_id'];
                       {
                         while($row= mysqli_fetch_assoc($result))
                         {
-                            $id=$row['trainer_id'];
+                            $id=$row['gym_exercise_id'];
                            // $image_src2 = $row['image'];
                           ?>
                       <tr class="text-center">
-                      <td><?php echo $row['trainer_name']; ?></td>
-                      <td><?php echo $row['trainer_age']." Years";; ?></td>
-                      <td><?php echo '<img src="gym_trainer_and_Certificate/'.$row['image'].'" width="100px;" height="100px" alt="images">'?></td>
-                     
-                      <td><?php echo $row['trainer_experience']." Years"; ?></td>
-                      <td><?php echo $row['trainer_description'] ?></td>
+                      <td><?php echo $row['gym_exercise_type']; ?></td>
+                      <td><?php echo $row['gym_exercise_name']; ?></td>
+                      <td><?php echo $row['gym_exercise_desc']; ?></td>
                      
                      <!-- <td>
                           <form action="Edit_Gym_Trainer.php" method="post">
@@ -387,7 +382,7 @@ $gym_id=$rows['gym_id'];
 
                       <td>
                         <form action="" method="post">
-                          <input type="hidden" name="delete_id" value="<?php echo $row['trainer_id']; ?>">
+                          <input type="hidden" name="delete_id" value="<?php echo $row['gym_exercise_id']; ?>">
                         <button type="submit" name="btn_delete" class="btn btn-danger">Delete</button>
                         </form>
                       </td>
@@ -422,7 +417,7 @@ $gym_id=$rows['gym_id'];
   <script src="js_view_gym/aos.js"></script>
   <script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/dist/jquery.validate.js"></script>
-<script type="text/javascript" src="js/dist/exercise_manage.min.js"></script>
+<!-- <script type="text/javascript" src="js/dist/exercise_manage.min.js"></script> -->
   <script src="js_view_gym/main.js"></script>    
     </body>
 </html>

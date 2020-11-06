@@ -10,15 +10,15 @@ $gym_id=$rows['gym_id'];
  
     if(isset($_POST['submit'])){
 
-        if(file_exists("gym_trainer_and_Certificate/".$_FILES['image']['name']))
-      {
-          $store = $_FILES['image']['name'];
-          $_SESSION['status'] = " Image already exist. '.$store.'";
-           header("location: gym_trainer.php");
-      }
+    //     if(file_exists("gym_trainer_and_Certificate/".$_FILES['image']['name']))
+    //   {
+    //     //   $store = $_FILES['image']['name'];
+    //     //   $_SESSION['status'] = " Image already exist. '.$store.'";
+    //     //    header("location: gym_trainer.php");
+    //   }
 
       
-else{
+
 
         $name = $_FILES['image']['name'];
         $trainer_name = $_POST['txtnm'];
@@ -58,7 +58,7 @@ else{
 
         }
     
-    }
+    
 
 }
 

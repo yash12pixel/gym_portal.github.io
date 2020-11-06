@@ -1,7 +1,7 @@
 <?php
  session_start();
  include ('security.php');
-include('include/header.php');
+//include('include/header.php');
 //include('include/navbar.php');
 include 'connection.php';
 $user_username=$_SESSION['username'];
@@ -9,6 +9,7 @@ $user_username=$_SESSION['username'];
 $sql = "SELECT * FROM gym_owner as g inner join gyms as gm on g.gym_owner_id=gm.gym_owner_id where username='$user_username' or email='$user_username'";
 $result = mysqli_query($con,$sql) or die(mysqli_error($con)); 
 $rows = mysqli_fetch_array($result);
+$gym_id=$rows['gym_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,10 +21,12 @@ $rows = mysqli_fetch_array($result);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500"> 
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
-    
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
 <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">
@@ -31,7 +34,10 @@ $rows = mysqli_fetch_array($result);
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/starstyle.css">
-    
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <ink href="https://fonts.googleapis.com/css?family=Teko&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <ink href="https://fonts.googleapis.com/css?family=Teko&display=swap" rel="stylesheet">
 
@@ -85,8 +91,15 @@ $rows = mysqli_fetch_array($result);
                       <li>
                         <a href="gym_payments.php">Payments</a>  
                       </li>
-                      <li><a href="add_gym_plans.php">Plan</a></li>
-                      <li><a href="offers.php">Ofers</a></li>
+                      <li class="has-children">
+                        <a href="#">Add</a>
+                        <ul class="dropdown arrow-top">
+                          <li><a href="add_gym_plans.php">Plan</a></li>
+                          <li><a href="offers.php">Ofers</a></li>
+                        </ul>
+                      </li>
+                      <!-- <li><a href="add_gym_plans.php">Plan</a></li>
+                      <li><a href="offers.php">Ofers</a></li> -->
                       <!-- <li><a href="gym_trainer.php">gym tariner</a></li> -->
                       <!-- <li><a href="Editgymprof.php">Edit Gym Profile</a></li> -->
                       <li class="has-children">
@@ -96,10 +109,17 @@ $rows = mysqli_fetch_array($result);
                           <li><a href="gym_trainer.php">Gym Trainer</a></li>
                           <li><a href="upld_images.php">Gallery</a></li>
                           <li><a href="exercise_management.php">Exercise Manage</a></li>
+                          <li><a href="add_gym_video.php">Video Manage</a></li>
                         </ul>
                       </li>
-                      
-			                <li><a href="view_members.php">View Members</a></li>
+                      <li class="has-children">
+                        <a href="#">View</a>
+                        <ul class="dropdown arrow-top">
+                          <li><a href="view_members.php">View Members</a></li>
+                          <li><a href="view_gym_video.php">View Videoes</a></li>
+                        </ul>
+                      </li>
+			                <!-- <li><a href="view_members.php">View Members</a></li> -->
                       <li><a href="Logout.php">Log out</a></li>
                     </ul>
                   </div>
@@ -158,7 +178,8 @@ $rows = mysqli_fetch_array($result);
                 echo "$description";
             }
             ?></p>
-            
+
+             <!-- <p><a href="view_gym_video.php" class="btn btn-primary pill px-4">Watch Video</a></p> -->
             
           </div>
           <div class="col-md-12 col-lg-6 ml-auto">
@@ -180,19 +201,68 @@ $rows = mysqli_fetch_array($result);
     </div>
     
     </section>
+
+
 <!-- exercise management start -->
 <div class="border-bottom">
+<div class="heading-with-border mt-5 text-center">
+          <h2 class="heading text-uppercase">Exercises</h2>
+        </div>
       <div class="row no-gutters">
-        <div class="col-md-6 col-lg-3">
+
+      <?php
+        $query_exercise = "select * from gym_exercise where gym_id = '$gym_id'";
+        $run = mysqli_query($con,$query_exercise);
+        $check = mysqli_num_rows($run) > 0;
+
+        if($check)
+        {
+            while($row = mysqli_fetch_array($run))
+            {
+              ?>
+                  <div class="col-md-6 col-lg-3">
           <div class="w-100 h-100 block-feature p-5 bg-light">
-            <span class="d-block mb-3">
-              <span class="flaticon-padmasana display-4"></span>
+            <span class="d-block mb-2 mt-2">
+              <!-- <span class="flaticon-padmasana display-4"></span> -->
+             
+              <h1>
+              <?php
+                  if($row['gym_exercise_type'] == "yoga")
+                  {
+                    echo"<span class='flaticon-padmasana display-4'></span>";
+                  }
+                  else if($row['gym_exercise_type'] == "weight_lifting")
+                  {
+                    echo"<span class='flaticon-weight display-4'></span>";
+                  }
+                  else if($row['gym_exercise_type'] == "boxing")
+                  {
+                    echo"<span class='flaticon-boxing-gloves display-4'></span>";
+                  }
+                  else if($row['gym_exercise_type'] == "running")
+                  {
+                    echo"<span class='flaticon-running display-4'></span>";
+                  }
+                  else if($row['gym_exercise_type'] == "cardio")
+                  {
+                    echo"<span class='flaticon-spinning display-4'></span>";
+                  }
+              ?>
+              </h1>
             </span>
-            <h2>Yoga</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugiat iure eveniet perferendis odit est.</p>
+            <h2 class="mt-2 mb-2"><?php echo $row['gym_exercise_name']; ?></h2>
+            <p ><?php echo $row['gym_exercise_desc']; ?></p>
           </div>
         </div>
-
+              <?php
+            }
+        }
+        else{
+          echo"no records available";
+        }
+      ?>
+        
+<!-- 
         <div class="col-md-6 col-lg-3">
           <div class="w-100 h-100 block-feature p-5">
             <span class="d-block mb-3">
@@ -220,7 +290,7 @@ $rows = mysqli_fetch_array($result);
             <h2>Running</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora fugiat iure eveniet perferendis odit est.</p>
           </div>
-        </div>
+        </div> -->
       </div>
     </div> <!-- .block-feature -->
     <!-- exercise manage ends -->
@@ -288,6 +358,60 @@ $rows = mysqli_fetch_array($result);
       </div>
     </div>
 
+ <!-- trainer start -->
+        <div class="site-section bg-light">
+
+<div class="container">
+  
+  <div class="heading-with-border text-center mb-5">
+    <h2 class="heading text-uppercase" style="font-size:22px;">Experts Trainer</h2>
+  </div>   
+  <div class="row">
+<?php
+
+$query_trainer = "SELECT * FROM trainer_gym WHERE gym_id = '$gym_id'";
+$run = mysqli_query($con,$query_trainer);
+$check = mysqli_num_rows($run) > 0;
+
+if($check)
+{
+    while($row = mysqli_fetch_array($run))
+    {
+      ?>
+
+ 
+      <div class="col-lg-4 mb-4">
+        <div class="block-trainer">
+          <img src="gym_trainer_and_Certificate/<?php echo $row['image']; ?>" alt="Image" height="100px" class="img-fluid">
+          <div class="block-trainer-overlay">
+            <h2 class="text-center" style="font-size:25px; text-align:center;"><?php echo $row['trainer_name']; ?></h2>
+            <p class="text-white" style="font-size:15px;"><?php echo $row['trainer_description']; ?></p>
+            <p style="font-size:15px;">
+              <!-- <a href="#" class="p-2"><span class="icon-facebook"></span></a>
+              <a href="#" class="p-2"><span class="icon-twitter"></span></a>
+              <a href="#" class="p-2"><span class="icon-instagram"></span></a> -->
+              <a>age:- <?php echo $row['trainer_age']; ?> years</a>
+            </p>
+            <p style="font-size:15px;">
+            <a>exp:- <?php echo $row['trainer_experience']; ?> years</a>
+            </p>
+          </div>
+        </div>    
+      </div>
+ 
+ 
+      <?php
+    }
+}
+else
+{
+  echo "no record found";
+}
+
+?>
+   </div>
+</div>
+</div>
 
 
 
@@ -514,61 +638,7 @@ $rows = mysqli_fetch_array($result);
 </div>		
         </div>
   
-        <!-- trainer start -->
-        <div class="site-section bg-light">
-
-<div class="container">
-  
-  <div class="heading-with-border text-center mb-5">
-    <h2 class="heading text-uppercase" style="font-size:22px;">Experts Trainer</h2>
-  </div>   
-  <div class="row">
-<?php
-
-$query_trainer = "SELECT * FROM trainer_gym WHERE gym_id = '$gym_id'";
-$run = mysqli_query($con,$query_trainer);
-$check = mysqli_num_rows($run) > 0;
-
-if($check)
-{
-    while($row = mysqli_fetch_array($run))
-    {
-      ?>
-
- 
-      <div class="col-lg-4 mb-4">
-        <div class="block-trainer">
-          <img src="gym_trainer_and_Certificate/<?php echo $row['image']; ?>" alt="Image" height="100px" class="img-fluid">
-          <div class="block-trainer-overlay">
-            <h2 class="text-center" style="font-size:25px; text-align:center;"><?php echo $row['trainer_name']; ?></h2>
-            <p class="text-white" style="font-size:15px;"><?php echo $row['trainer_description']; ?></p>
-            <p style="font-size:15px;">
-              <!-- <a href="#" class="p-2"><span class="icon-facebook"></span></a>
-              <a href="#" class="p-2"><span class="icon-twitter"></span></a>
-              <a href="#" class="p-2"><span class="icon-instagram"></span></a> -->
-              <a>age:- <?php echo $row['trainer_age']; ?> years</a>
-            </p>
-            <p style="font-size:15px;">
-            <a>exp:- <?php echo $row['trainer_experience']; ?> years</a>
-            </p>
-          </div>
-        </div>    
-      </div>
- 
- 
-      <?php
-    }
-}
-else
-{
-  echo "no record found";
-}
-
-?>
-   </div>
-</div>
-</div>
-
+       
 <br>
 
 

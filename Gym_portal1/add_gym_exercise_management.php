@@ -99,18 +99,18 @@ if(isset($_POST['btn_delete']))
 {
     $delete_id = $_POST['delete_id'];
 
-    $que = "DELETE FROM gym_offers WHERE offer_id = '$delete_id'";
+    $que = "DELETE FROM gym_exercise WHERE gym_exercise_id = '$delete_id'";
     $run = mysqli_query($con,$que);
 
     if($run)
     {
          $_SESSION['success'] = "Your Data is Deleted";
-         header('Location:offers.php');   
+         header('Location:exercise_management.php');   
     }
     else
     {
          $_SESSION['status'] = "Your Data is Not Deleted";
-         header('Location:offers.php');    
+         header('Location:exercise_management.php');    
     }
 }
 
