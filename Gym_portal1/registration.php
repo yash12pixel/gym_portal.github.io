@@ -15,6 +15,8 @@
 <?php
 include_once'header.php';
 include_once'connection.php';
+//Customer_id auto increment
+
 // define variables and set to empty values
 $fnameErr = $lnameErr = $unmErr = $emailErr = $mobileErr = $genErr= $addErr= $passwordErr = $cpassErr= "";
 //define variables for user data storage
@@ -146,22 +148,48 @@ if (isset($_POST["submit"])) {
     //Inserting data into the database
     if(!empty($fnmae) && !empty($lname)&& !empty($username)&& !empty($email)&&!empty($mobileno)&&!empty($gender)&&!empty($address)&&!empty($password))
     {
-    $sql="insert into customer(fname,lname,username,password,address,mobile_no,email,gender,membership_type) values('".$fnmae."', '".$lname."', '".$username."', '".$password."','".$address."','".$mobileno."','".$email."','".$gender."','b')";
-    $res=mysqli_query($con,$sql);
-    If($res)
-    {
-        echo "<script type=\"text/javascript\">".
-        "alert('Registration successful');".
-        "</script>";
-        header("location:login.php");
+        //Cust id auto increment
+        $get_id="select * from customer";
+         $cust_result=mysqli_query($con,$get_id);
+         if(mysqli_num_rows($cust_result) != 0)
+         {
+             //last record
+             $sql_last_rec="select * from customer order by customer_id desc limit 1";
+             $res_rec=mysqli_query($con,$sql_last_rec);
+             $row=mysqli_fetch_assoc($res_rec);
+             $id=$row['customer_id'];
+             
+            
+            $stringSplit2 = trim(substr($id, (0 + 1)));
+            $val = (int) $stringSplit2;
+            $inc = $val + 1;
+            // echo $inc."<br/>";
+            $new_id = "c" . $inc;
+            echo $new_id;
+            //
+             
+              $sql = "insert into customer(customer_id,fname,lname,username,password,address,mobile_no,email,gender,membership_type) values('" . $new_id . "','" . $fnmae . "', '" . $lname . "', '" . $username . "', '" . $password . "','" . $address . "','" . $mobileno . "','" . $email . "','" . $gender . "','b')";
+            $res = mysqli_query($con, $sql);
+            If ($res) {
+                echo "<script type=\"text/javascript\">" .
+                "alert('Registration successful');" .
+                "</script>";
+                header("location:login.php");
+            } Else {
+                echo "<script type=\"text/javascript\">" .
+                "alert('There was some problem while inserting record');" .
+                "</script>";
+            }
+        }
+        else
+        {
+            
+        }
     }
-    Else
-    {
-        echo "<script type=\"text/javascript\">".
-        "alert('There was some problem while inserting record');".
-        "</script>";
-    }
-    }
+        
+        
+        //
+   
 }
 ?>
 <div class="container">
@@ -246,6 +274,6 @@ if (isset($_POST["submit"])) {
         <script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
         <script type="text/javascript" src="js/dist/jquery.validate.js"></script>
         <script type="text/javascript" src="js/cust_reg.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.min.js"></script>
 </body>
 </html>

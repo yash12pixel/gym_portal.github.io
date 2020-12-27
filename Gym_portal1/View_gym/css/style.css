@@ -107,7 +107,8 @@ a {
     box-shadow: none !important; }
 
 .site-section {
-  padding: 7rem 0; }
+  padding: 7rem 0;
+  margin-top: -4rem; }
   @media (min-width: 768px) {
     .site-section {
       padding: 7em 0; } }

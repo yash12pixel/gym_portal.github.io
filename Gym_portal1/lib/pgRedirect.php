@@ -35,7 +35,7 @@ $paramList["TXN_AMOUNT"] = $TXN_AMOUNT;
 $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
 
 
-$paramList["CALLBACK_URL"] = "http://localhost/yash11/gym_portal1/lib/pgResponse.php";
+$paramList["CALLBACK_URL"] = "http://localhost/yash15/gym_portal1/lib/pgResponse.php";
 /*
 $paramList["MSISDN"] = $MSISDN; //Mobile number of customer
 $paramList["EMAIL"] = $EMAIL; //Email ID of customer

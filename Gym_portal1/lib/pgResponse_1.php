@@ -307,7 +307,7 @@ if($isValidChecksum == "TRUE") {
     
         
          //storing data
-        $sql1="insert into customer_membership(`customer_id`, `gym_id`, `membership_start_date`, `membership_end_date`, `plan_id`) values($customer_id,$gym_id,'$membership_start_date','$membership_end_date',$plan_id)";
+        $sql1="insert into customer_membership(`customer_id`, `gym_id`, `membership_start_date`, `membership_end_date`, `plan_id`) values('$customer_id',$gym_id,'$membership_start_date','$membership_end_date',$plan_id)";
         $res2 = mysqli_query($con, $sql1);
         
        $TransSQL="insert into customer_gym_transaction(`Transaction_id`, `Order_id`, `Currency`, `Transaction_date`, `Bank_name`, `Transaction_amount`, `gym_id`, `customer_id`) values('$trans_id','$ORDER_ID','$currency','$trans_date','$bank_name',$trans_amt,$gym_id,$customer_id)";

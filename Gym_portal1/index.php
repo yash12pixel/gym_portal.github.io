@@ -21,6 +21,17 @@ if(isset($_SESSION['user_type']))
 .checked {
   color: orange;
 }
+    	.card{
+    		border: 2px solid #ccc; border-radius: 3px; padding: 10px;
+    	}
+
+      .card_check{
+        border: 3px solid red;
+      }
+
+    	.compare{
+    		font-weight: 600; color: blue; cursor: pointer;
+    	}
 </style>
 <link rel="stylesheet" href="css/pagination.css"> 
 
@@ -166,7 +177,17 @@ if(isset($_SESSION['user_type']))
                 </p>
             </div>
         </div>
-        <div class="row">
+        
+         <div class="row" id="btn_compare" style="display:none;">
+        <div class="col-sm-12" style="margin-top: 50px;">
+          <form action="compare.php" method="post">
+               <input type="hidden" value="" id="card_one" name="card_one"/>
+               <input type="hidden" value="" id="card_two" name="card_two"/>
+               <input type="submit" value="Compare Gyms" class="btn btn-success" style="float:right;"/>
+           </form>
+        </div>  
+      </div>
+        <div class="row" id="btn_compare">
         <?php
 
             include('connection.php');
@@ -236,7 +257,7 @@ if(isset($_SESSION['user_type']))
         $averageRating = round(2*$average)/2;                          
                         ?>
                 <div class="col-md-4 mt-3">
-                <div class="card">
+                <div class="card compare_card<?php echo $row['gym_id']; ?>">
                     <?php 
                     if(empty($row['gym_logo']))
                     {
@@ -357,7 +378,7 @@ if(isset($_SESSION['user_type']))
                             <?php 
                             if(!empty($row['gym_desc']))
                             {
-                                echo substr($row['gym_desc'],0,30).'....';
+                                echo substr($row['gym_desc'],0,30).'.....';
                                 
                             } 
                             else
@@ -366,7 +387,7 @@ if(isset($_SESSION['user_type']))
                             }
                                 ?>
                         </p>
-                       
+                        <button style="color: #fff;" class="btn btn-primary btn-xs compare" rel="<?php echo $row['gym_id']; ?>">Compare</button>
                         <a href="View_gym.php?id=<?php echo $row['gym_id'];?>" id="btn_find_gym" class="btn btn-primary">View Gym</a>
                     </div>
                 </div>
@@ -486,6 +507,60 @@ if(isset($_SESSION['user_type']))
         }
     }
 })
+
+
+
+   	$(document).ready(function(){
+           $(document).on('click','.compare',function(){
+            var id = $(this).attr('rel');
+            var size_class = $('.card_check').length;
+            if(size_class > 1)
+            {
+                if($(".compare_card"+id).hasClass("card_check"))
+                {
+                    
+                    $(".compare_card"+id).removeClass("card_check");
+                    
+                }
+                else
+                {
+                    alert("You have already select maximum product");
+                }
+               
+            }
+            else
+            {
+                if(size_class>0)
+                {
+                     $('#btn_compare').show();
+                }
+                
+                if($(".compare_card"+id).hasClass("card_check"))
+                {
+                    $(".compare_card"+id).removeClass("card_check");
+                }
+                else
+                {
+                    $(".compare_card"+id).addClass("card_check");
+                    
+                    var pro1 = $('#card_one').val();
+                    var pro2 = $('#card_two').val();
+                    
+                    if(pro1=="")
+                    {
+                        $('#card_one').val(id);
+                    }
+                    else if(pro2=="")
+                    {
+                        $('#card_two').val(id);
+                    }
+                    
+                }
+            }
+             
+           }); 
+
+       });
 </script>
 
 <?php include('include/footer.php');  ?>

@@ -153,50 +153,65 @@ th, td {
 
 
 <div class="site-navbar-wrap bg-white">
-  
-  <div class="container">
-    <div class="site-navbar bg-light">
-      <div class="py-1">
-        <div class="row align-items-center">
-          <div class="col-2">
-            <h2 class="mb-0 site-logo"><a href="index_view_page.php"><strong><?php echo $rows['gym_name']; ?></strong>  </a></h2>
-          </div>
-          <div class="col-10">
-            <nav class="site-navigation text-right" role="navigation">
-              <div class="container">
-                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
-
-                <ul class="site-menu js-clone-nav d-none d-lg-block">
-                  <li>
-                    <a href="index_view_page.php">Home</a>
-                  </li>
-                  <li>
-                    <a href="gym_payments.php">Payments</a>  
-                  </li>
-                  <li><a href="add_gym_plans.php">Plan</a></li>
-                  <li><a href="offers.php">Ofers</a></li>
-                  <!-- <li><a href="gym_trainer.php">gym tariner</a></li> -->
-                  <!-- <li><a href="Editgymprof.php">Edit Gym Profile</a></li> -->
-                  <li class="has-children active">
-                    <a href="Editgymprof.php">Edit Gym Progile</a>
-                    <ul class="dropdown arrow-top">
-                      <li><a href="Editgymprof.php">Edit Gym Profile</a></li>
-                      <li><a href="gym_trainer.php">Gym Trainer</a></li>
-                      <li><a href="upld_images.php">Gallery</a></li>
-                    </ul>
-                  </li>
-                  
-                  <li><a href="view_members.php">View Members</a></li>
-                  <li><a href="Logout.php">Log out</a></li>
-                </ul>
+      
+      <div class="container">
+        <div class="site-navbar bg-light">
+          <div class="py-1">
+            <div class="row align-items-center">
+              <div class="col-2">
+                <h2 class="mb-0 site-logo"><a href="index_view_page.php"><strong><?php echo $rows['gym_name']; ?></strong>  </a></h2>
               </div>
-            </nav>
+              <div class="col-10">
+                <nav class="site-navigation text-right" role="navigation">
+                  <div class="container">
+                    <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+                    <ul class="site-menu js-clone-nav d-none d-lg-block">
+                      <li class="active">
+                        <a href="index_view_page.php">Home</a>
+                      </li>
+                      <li>
+                        <a href="gym_payments.php">Payments</a>  
+                      </li>
+                      <li class="has-children">
+                        <a href="#">Add</a>
+                        <ul class="dropdown arrow-top">
+                          <li><a href="add_gym_plans.php">Plan</a></li>
+                          <li><a href="offers.php">Offers</a></li>
+                        </ul>
+                      </li>
+                      <!-- <li><a href="add_gym_plans.php">Plan</a></li>
+                      <li><a href="offers.php">Ofers</a></li> -->
+                      <!-- <li><a href="gym_trainer.php">gym tariner</a></li> -->
+                      <!-- <li><a href="Editgymprof.php">Edit Gym Profile</a></li> -->
+                      <li class="has-children">
+                        <a href="Editgymprof.php">Edit Gym Profile</a>
+                        <ul class="dropdown arrow-top">
+                          <li><a href="Editgymprof.php">Edit Gym Profile</a></li>
+                          <li><a href="gym_trainer.php">Gym Trainer</a></li>
+                          <li><a href="upld_images.php">Gallery</a></li>
+                          <li><a href="exercise_management.php">Exercise</a></li>
+                          <li><a href="add_gym_video.php">Videos</a></li>
+                        </ul>
+                      </li>
+                      <li class="has-children">
+                        <a href="#">View</a>
+                        <ul class="dropdown arrow-top">
+                          <li><a href="view_members.php">Members</a></li>
+                          <li><a href="view_gym_video.php?id=<?php echo $gym_id; ?>">Videos</a></li>
+                        </ul>
+                      </li>
+			                <!-- <li><a href="view_members.php">View Members</a></li> -->
+                      <li><a href="Logout.php">Log out</a></li>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
     
     <div class="form-container">
  
@@ -336,10 +351,10 @@ $img_id=$row['image_id'];
     <table>
         <tr>
             <td>
-                <div class='person mr-3'><img src='gym_images/<?php echo $imagee;?>'  alt='Image' height="400px" width="500px"  ></div>
+                <div class='person mr-3' ><img src='gym_images/<?php echo $imagee;?>'  alt='Image' height="400px" width="500px" style="width: 300px; height: 221px; margin-right: 50rem;" ></div>
             </td>
             <td>
-                </div><a onclick="return confirm('Are you sure?');" class="btn btn-primary" href="delete_images.php?id=<?php echo $img_id; ?>">delete</a></div>
+                </div><a onclick="return confirm('Are you sure?');" class="btn btn-primary" href="delete_images.php?id=<?php echo $img_id; ?>" style="margin-left: -50rem;">delete</a></div>
             </td>
         </tr>
     </table>

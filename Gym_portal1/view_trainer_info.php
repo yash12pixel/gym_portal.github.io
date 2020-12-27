@@ -1,12 +1,39 @@
 <?php 
 include 'connection.php';
 include('include/header.php');
+// include('include/navbar.php');
 
-// $gym_id=$_GET['id'];
-// $sql="select * from gyms as g inner join gym_owner as go on g.gym_owner_id=go.gym_owner_id where gym_id=$gym_id";
-// $result = mysqli_query($con,$sql);
-// $rows = mysqli_fetch_array($result);
-// $gym_id=$rows['gym_id'];
+
+$BMI=$MEMBERSHIP_TYPE=$customer_id='';
+
+if(isset($_SESSION['username']))
+{
+    $user= $_SESSION['username'];
+    $sql1="select * from customer where username='$user' or email='$user'";
+    $res1 = mysqli_query($con, $sql1);
+    $result1 = mysqli_fetch_array($res1);
+    if ($res1)
+    {
+        $customer_id = $result1['customer_id'];
+        $BMI=$result1['BMI'];
+        $MEMBERSHIP_TYPE=$result1['membership_type'];
+    }
+}   
+
+
+$gym_id=$_GET['id'];
+$trainer_id=$_GET['Tid'];
+$sql="select * from gyms as g inner join gym_owner as go on g.gym_owner_id=go.gym_owner_id where gym_id=$gym_id";
+$result = mysqli_query($con,$sql);
+$rows = mysqli_fetch_array($result);
+$gym_id=$rows['gym_id'];
+//include('include/slider.php');
+
+//Trainer data
+$query_trainer = "SELECT * FROM trainer_gym WHERE trainer_id = '$trainer_id'";
+$run = mysqli_query($con,$query_trainer);
+$row= mysqli_fetch_assoc($run);
+//echo $row['trainer_name'];
 ?>
 
 <html>
@@ -188,44 +215,44 @@ th, td {
         <div class="row align-items-center">
           <div class="col-md-12 col-lg-5 mb-5 mb-lg-0 order-2">
             <h2 class="mb-3 text-uppercase"> <strong class="text-black font-weight-bold">Trainer Information</strong></h2>
-            <p class="lead mb-2"><strong class="text-black font-weight-bold">Trainer Name:-</strong>Yash Kothari</p>
-            <p class="mb-1" style="font-size: 18px;"><strong class="text-black font-weight-bold">Trainer Age:-</strong>22</p>
-            <p class="mb-1" style="font-size: 18px;"><strong class="text-black font-weight-bold">Trainer Experiance:-</strong>2</p>
+            <p class="lead mb-2"><strong class="text-black font-weight-bold">Trainer Name:-</strong><?php echo $row['trainer_name'] ?></p>
+            <p class="mb-1" style="font-size: 18px;"><strong class="text-black font-weight-bold">Trainer Age:-</strong><?php echo $row['trainer_age'] ?></p>
+            <p class="mb-1" style="font-size: 18px;"><strong class="text-black font-weight-bold">Trainer Experiance:-</strong><?php echo $row['trainer_experience'] ?></p>
             <p class="mb-1" style="font-size: 18px;"><strong class="text-black font-weight-bold">Trainer Description:-</strong></p>
 
             <ul class="site-block-check">
-              <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+              <li style="font-size: 17px;"><?php echo $row['trainer_description'] ?></li>
            
             </ul>
             <!-- <p><a href="#" class="btn btn-primary pill px-4">Read More</a></p> -->
           </div>
           <div class="col-md-12 col-lg-6 mr-auto order-1">
-            <img src="images/18.jpg" alt="Image" class="img-fluid">
+            <img src="gym_trainer_and_Certificate/<?php echo $row['image'] ?>" alt="Image" class="img-fluid">
           </div>
         </div>
       </div>
     </div>
 
-
+    <?php
+            $gym_id = $rows['gym_id'];
+            $res = mysqli_query($con, "SELECT * FROM trainer_achievements where trainer_id='$trainer_id'");
+            if(mysqli_num_rows($res)!=0)
+            { 
+              ?>
     
     <section id="gallery"></section>   
 <div class="site-section">
       <div class="">
         <div class="row">
           <div class="col-md-6 mx-auto text-center mb-5 section-heading heading-with-border ">
-            <h2 class="mb-0 text-success" style="font-size:25px;">Our Gallery</h2>
+            <h2 class="mb-0 text-success" style="font-size:25px;"><?php echo $row['trainer_name'] ?>'s Achievements</h2>
           </div>
             
         </div>
         <div class="row no-gutters">
             
               <?php
-            $gym_id = $rows['gym_id'];
-            $res = mysqli_query($con, "SELECT * FROM gym_image where gym_id='$gym_id'");
-            if(mysqli_num_rows($res)==0)
-            {
-                echo " <p class='lead text-center' >No images available yet</p>";
-            }
+            
             while ($row = mysqli_fetch_array($res)) {
                 $displ = $row['image_path'];
                 $imagee = $row['image_path'];
@@ -234,10 +261,11 @@ th, td {
    
            
                 <div class="col-md-6 col-lg-3">
-                    <a href="gym_images/<?php echo $imagee; ?>" class="image-popup img-opacity"><img src="gym_images/<?php echo $imagee; ?>" alt="Image" class="img-fluid"></a>
+                    <a href="gym_trainer_and_Certificate/<?php echo $imagee; ?>" class="image-popup img-opacity"><img src="gym_trainer_and_Certificate/<?php echo $imagee; ?>" alt="Image" class="img-fluid"></a>
                 </div>    
                 <?php
             }
+          }
             ?>
 
         </div>
@@ -245,7 +273,7 @@ th, td {
     </div>
     </section>
 
-<script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/dist/jquery.validate.js"></script>
 <script type="text/javascript" src="js/edit_trainer.js.js"></script>
      <script src="js_view_gym/jquery-3.3.1.min.js"></script>
@@ -261,6 +289,8 @@ th, td {
   <script src="js_view_gym/aos.js"></script>
 
   <script src="js_view_gym/main.js"></script>
-</body>
+
+
+
 </body>
 </html>

@@ -174,49 +174,64 @@ $gym_id=$rows['gym_id'];
 
 
 <div class="site-navbar-wrap bg-white">
-  
-  <div class="container">
-    <div class="site-navbar bg-light">
-      <div class="py-1">
-        <div class="row align-items-center">
-          <div class="col-2">
-            <h2 class="mb-0 site-logo"><a href="index_view_page.php"><strong><?php echo $rows['gym_name']; ?></strong>  </a></h2>
-          </div>
-          <div class="col-10">
-            <nav class="site-navigation text-right" role="navigation">
-              <div class="container">
-                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
-
-                <ul class="site-menu js-clone-nav d-none d-lg-block">
-                  <li>
-                    <a href="index_view_page.php">Home</a>
-                  </li>
-                  <li>
-                    <a href="gym_payments.php">Payments</a>  
-                  </li>
-                  <li><a href="add_gym_plans.php">Plan</a></li>
-                  <li><a href="offers.php">Ofers</a></li>
-                  <!-- <li><a href="gym_trainer.php">gym tariner</a></li> -->
-                  <!-- <li><a href="Editgymprof.php">Edit Gym Profile</a></li> -->
-                  <li class="has-children active">
-                    <a href="Editgymprof.php">Edit Gym Progile</a>
-                    <ul class="dropdown arrow-top">
-                      <li><a href="Editgymprof.php">Edit Gym Profile</a></li>
-                      <li><a href="gym_trainer.php">Gym Trainer</a></li>
-                      <li><a href="upld_images.php">Gallery</a></li>
-                    </ul>
-                  </li>
-                  
-                  <li><a href="view_members.php">View Members</a></li>
-                  <li><a href="Logout.php">Log out</a></li>
-                </ul>
+      
+      <div class="container">
+        <div class="site-navbar bg-light">
+          <div class="py-1">
+            <div class="row align-items-center">
+              <div class="col-2">
+                <h2 class="mb-0 site-logo"><a href="index_view_page.php"><strong><?php echo $rows['gym_name']; ?></strong>  </a></h2>
               </div>
-            </nav>
+              <div class="col-10">
+                <nav class="site-navigation text-right" role="navigation">
+                  <div class="container">
+                    <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+                    <ul class="site-menu js-clone-nav d-none d-lg-block">
+                      <li class="active">
+                        <a href="index_view_page.php">Home</a>
+                      </li>
+                      <li>
+                        <a href="gym_payments.php">Payments</a>  
+                      </li>
+                      <li class="has-children">
+                        <a href="#">Add</a>
+                        <ul class="dropdown arrow-top">
+                          <li><a href="add_gym_plans.php">Plan</a></li>
+                          <li><a href="offers.php">Offers</a></li>
+                        </ul>
+                      </li>
+                      <!-- <li><a href="add_gym_plans.php">Plan</a></li>
+                      <li><a href="offers.php">Ofers</a></li> -->
+                      <!-- <li><a href="gym_trainer.php">gym tariner</a></li> -->
+                      <!-- <li><a href="Editgymprof.php">Edit Gym Profile</a></li> -->
+                      <li class="has-children">
+                        <a href="Editgymprof.php">Edit Gym Profile</a>
+                        <ul class="dropdown arrow-top">
+                          <li><a href="Editgymprof.php">Edit Gym Profile</a></li>
+                          <li><a href="gym_trainer.php">Gym Trainer</a></li>
+                          <li><a href="upld_images.php">Gallery</a></li>
+                          <li><a href="exercise_management.php">Exercise</a></li>
+                          <li><a href="add_gym_video.php">Videos</a></li>
+                        </ul>
+                      </li>
+                      <li class="has-children">
+                        <a href="#">View</a>
+                        <ul class="dropdown arrow-top">
+                          <li><a href="view_members.php">Members</a></li>
+                          <li><a href="view_gym_video.php?id=<?php echo $gym_id; ?>">Videos</a></li>
+                        </ul>
+                      </li>
+			                <!-- <li><a href="view_members.php">View Members</a></li> -->
+                      <li><a href="Logout.php">Log out</a></li>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </div>    <br>
 
             <!-- Modal -->
@@ -236,24 +251,23 @@ $gym_id=$rows['gym_id'];
             <label>Exercise Type:</label>
             <!-- <input type="text" name="exercise_type" id = "exercise_type" class="form-control" placeholder="Enter Triner Name"> -->
             <select name="exercise_type">
-            <option>--Select Exercise Type--</option>
+            <option value=''>--Select Exercise Type--</option>
             <option value="yoga">Yoga</option>
             <option value="weight_lifting">Weight Lifiting</option>
             <option value="boxing">Boxing</option>
             <option value="running">Running</option>
             <option value="cardio">Cardio</option>
             </select>
-
         </div>
 
         <div class="form-group">
             <label>Exercise Name:</label>
-            <input type="text" name="txtexnm" id = "txtexnm" class="form-control" placeholder="Enter Exercise Name" required>
+            <input type="text" name="txtexnm" id = "txtexnm" class="form-control" placeholder="Enter Exercise Name">
         </div>
 
         <div class="form-group">
             <label>Exercise Description:</label>
-            <textarea name="txtdesc" id = "txtdesc" class="form-control" placeholder="Enter Exercise description" rows="4" cols="50" required></textarea>
+            <textarea name="txtdesc" id = "txtdesc" class="form-control" placeholder="Enter Exercise description" rows="4" cols="50"></textarea>
         </div>
        
 
@@ -417,6 +431,7 @@ $gym_id=$rows['gym_id'];
   <script src="js_view_gym/aos.js"></script>
   <script type="text/javascript" src="js/dist/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/dist/jquery.validate.js"></script>
+<script type="text/javascript" src="js/exercise_manage.js"></script>
 <!-- <script type="text/javascript" src="js/dist/exercise_manage.min.js"></script> -->
   <script src="js_view_gym/main.js"></script>    
     </body>

@@ -35,7 +35,7 @@ header("Cache-Control: no-cache");
 header("Expires: 0");
 
 //defining variables for session 
-$customer_id="";
+$customer_id=$membership_start_date=$membership_end_date="";
 
 // following files need to be included
 require_once("config_paytm.php");
@@ -47,6 +47,7 @@ $isValidChecksum = "FALSE";
 
 //getting session data
 $customer_id=$_SESSION['customer_id'];
+echo $_SESSION['customer_id'];
 $membership_start_date=$_SESSION['start_date'];
 $membership_end_date=$_SESSION['end_date'];
 
@@ -72,7 +73,7 @@ if($isValidChecksum == "TRUE") {
             $bank_name=$_POST['BANKNAME'];
             
             //getting customer data for email
-            $Cust_SQL= mysqli_query($con, "select * from customer where customer_id=$customer_id");
+            $Cust_SQL= mysqli_query($con, "select * from customer where customer_id='$customer_id'");
             $customer_data= mysqli_fetch_array($Cust_SQL);
             $fname=$customer_data['fname'];
             $lname=$customer_data['lname'];
@@ -296,7 +297,7 @@ if($isValidChecksum == "TRUE") {
         
         
 	
-        $query = "update customer set p_statrt_date='$membership_start_date',p_end_date='$membership_end_date',membership_type='p' where customer_id=$customer_id";
+        $query = "update customer set p_statrt_date='$membership_start_date',p_end_date='$membership_end_date',membership_type='p' where customer_id='$customer_id'";
         $res = mysqli_query($con, $query);
         
         $TransSQL="insert into customer_transaction(`Trans_id`, `Order_id`, `Currency`, `Trans_date`, `Bank_name`, `Transaction_amount`,  `customer_id`) values('$trans_id','$ORDER_ID','$currency','$trans_date','$bank_name',$trans_amt,$customer_id)";

@@ -1,11 +1,12 @@
 <?php 
 include 'connection.php';
 include('include/header.php');
+session_start();
 // include('include/navbar.php');
 
 
 $BMI=$MEMBERSHIP_TYPE=$customer_id='';
-
+// echo $_SESSION['username'];
 if(isset($_SESSION['username']))
 {
     $user= $_SESSION['username'];
@@ -18,6 +19,7 @@ if(isset($_SESSION['username']))
         $BMI=$result1['BMI'];
         $MEMBERSHIP_TYPE=$result1['membership_type'];
     }
+    
 }   
 
 
@@ -195,8 +197,7 @@ Swal.fire({
                       <li><a href="#trainer">Trainers</a></li>
                       <li><a href="#gallery">Gallery</a></li>
                       <li><a href="#rating">Ratting & Feddback</a></li>
-                      
-                      <li><a href="#contact_gym">Contact Gym</a></li>
+                     
                       
                     
                     </ul>
@@ -278,8 +279,8 @@ Swal.fire({
     
 <!-- exercise management start -->
 <section id="exercise">
-<div class="border-bottom">
-<div class="heading-with-border mt-5 text-center">
+<div class="border-bottom mt-1">
+<div class="heading-with-border mt-1 text-center">
           <h2 class="heading text-uppercase">Exercises</h2>
         </div>
       <div class="row no-gutters">
@@ -301,26 +302,26 @@ Swal.fire({
              
               <h1>
               <?php
-                  if($row['gym_exercise_type'] == "yoga")
-                  {
-                    echo"<span class='flaticon-padmasana display-4'></span>";
-                  }
-                  else if($row['gym_exercise_type'] == "weight_lifting")
-                  {
-                    echo"<span class='flaticon-weight display-4'></span>";
-                  }
-                  else if($row['gym_exercise_type'] == "boxing")
-                  {
-                    echo"<span class='flaticon-boxing-gloves display-4'></span>";
-                  }
-                  else if($row['gym_exercise_type'] == "running")
-                  {
-                    echo"<span class='flaticon-running display-4'></span>";
-                  }
-                  else if($row['gym_exercise_type'] == "cardio")
-                  {
-                    echo"<span class='flaticon-spinning display-4'></span>";
-                  }
+                    // if($row['gym_exercise_type'] == "yoga")
+                    // {
+                    //   echo"<span class='flaticon-padmasana display-4'></span>";
+                    // }
+                    // else if($row['gym_exercise_type'] == "weight_lifting")
+                    // {
+                    //   echo"<span class='flaticon-weight display-4'></span>";
+                    // }
+                    // else if($row['gym_exercise_type'] == "boxing")
+                    // {
+                    //   echo"<span class='flaticon-boxing-gloves display-4'></span>";
+                    // }
+                    // else if($row['gym_exercise_type'] == "running")
+                    // {
+                    //   echo"<span class='flaticon-running display-4'></span>";
+                    // }
+                    // else if($row['gym_exercise_type'] == "cardio")
+                    // {
+                    //   echo"<span class='flaticon-spinning display-4'></span>";
+                    // }
               ?>
               </h1>
             </span>
@@ -332,7 +333,7 @@ Swal.fire({
             }
         }
         else{
-          echo"no records available";
+          echo"<p style='text-align: center'>no records available</p>";
         }
       ?>
     
@@ -513,11 +514,11 @@ Swal.fire({
     </section>
  <!-- trainer start -->
  <section id="trainer">
- <div class="site-section bg-light">
+ <div class="site-section bg-light mb-1">
 
 <div class="container">
   
-  <div class="heading-with-border text-center mb-5">
+  <div class="heading-with-border text-center mb-1">
     <h2 class="heading text-uppercase" style="font-size:22px;">Experts Trainer</h2>
   </div>   
   <div class="row">
@@ -538,7 +539,7 @@ if($check)
         <div class="block-trainer">
           <img src="gym_trainer_and_Certificate/<?php echo $row['image']; ?>" alt="Image" height="100px" class="img-fluid">
           <div class="block-trainer-overlay">
-            <a href="view_trainer_info.php" class="text-center" style="font-size:25px; text-align:center;"><?php echo $row['trainer_name']; ?></a>
+            <a href="view_trainer_info.php?id=<?php echo $gym_id; ?>&Tid=<?php echo $row['trainer_id']; ?>" class="text-center" style="font-size:25px; text-align:center;"><?php echo $row['trainer_name']; ?></a>
             <p class="text-white" style="font-size:15px;"><?php echo $row['trainer_description']; ?></p>
             <p style="font-size:15px;">
               <!-- <a href="#" class="p-2"><span class="icon-facebook"></span></a>
@@ -570,10 +571,10 @@ else
 
 
     <section id="gallery"></section>   
-<div class="site-section">
+<div class="site-section mb-1">
       <div class="">
         <div class="row">
-          <div class="col-md-6 mx-auto text-center mb-5 section-heading heading-with-border ">
+          <div class="col-md-6 mx-auto text-center mb-2 section-heading heading-with-border">
             <h2 class="mb-0 text-success" style="font-size:25px;">Our Gallery</h2>
           </div>
             
@@ -640,8 +641,9 @@ else
 	}	
 	?>		
 	<br>		
-	<div id="ratingDetails"> 		
-		<div class="row">			
+  <section id="rating">
+	<div id="ratingDetails mb-1"> 		
+		<div class="row mb-1">			
 			<div class="col-sm-3">				
 				<h4 style="color:green; font-size: 20px;">Rating and Reviews</h4>
 				<h2 class="bold padding-bottom-7"><?php printf('%.1f', $average); ?> <small>/ 5</small></h2>				
@@ -962,6 +964,7 @@ $(function() {
 
   <script src="js_view_gym/main.js"></script>
   <br>
+  <section id="contact">
   <?php include('include/footer.php'); ?>  
   </body>
 </html>

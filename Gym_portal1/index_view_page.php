@@ -95,7 +95,7 @@ $gym_id=$rows['gym_id'];
                         <a href="#">Add</a>
                         <ul class="dropdown arrow-top">
                           <li><a href="add_gym_plans.php">Plan</a></li>
-                          <li><a href="offers.php">Ofers</a></li>
+                          <li><a href="offers.php">Offers</a></li>
                         </ul>
                       </li>
                       <!-- <li><a href="add_gym_plans.php">Plan</a></li>
@@ -103,20 +103,20 @@ $gym_id=$rows['gym_id'];
                       <!-- <li><a href="gym_trainer.php">gym tariner</a></li> -->
                       <!-- <li><a href="Editgymprof.php">Edit Gym Profile</a></li> -->
                       <li class="has-children">
-                        <a href="Editgymprof.php">Edit Gym Progile</a>
+                        <a href="Editgymprof.php">Edit Gym Profile</a>
                         <ul class="dropdown arrow-top">
                           <li><a href="Editgymprof.php">Edit Gym Profile</a></li>
                           <li><a href="gym_trainer.php">Gym Trainer</a></li>
                           <li><a href="upld_images.php">Gallery</a></li>
-                          <li><a href="exercise_management.php">Exercise Manage</a></li>
-                          <li><a href="add_gym_video.php">Video Manage</a></li>
+                          <li><a href="exercise_management.php">Exercise</a></li>
+                          <li><a href="add_gym_video.php">Videos</a></li>
                         </ul>
                       </li>
                       <li class="has-children">
                         <a href="#">View</a>
                         <ul class="dropdown arrow-top">
-                          <li><a href="view_members.php">View Members</a></li>
-                          <li><a href="view_gym_video.php?id=<?php echo $gym_id; ?>">View Videoes</a></li>
+                          <li><a href="view_members.php">Members</a></li>
+                          <li><a href="view_gym_video.php?id=<?php echo $gym_id; ?>">Videos</a></li>
                         </ul>
                       </li>
 			                <!-- <li><a href="view_members.php">View Members</a></li> -->
@@ -134,7 +134,7 @@ $gym_id=$rows['gym_id'];
 
 
     <section>
-    <div class="site-section">
+    <div class="site-section" style="margin-top: -4rem;">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-12 col-lg-5 mb-1 mb-lg-0 heading-with-border ">
@@ -205,7 +205,7 @@ $gym_id=$rows['gym_id'];
 
 <!-- exercise management start -->
 <div class="border-bottom">
-<div class="heading-with-border mt-5 text-center">
+<div class="heading-with-border mb-1 text-center">
           <h2 class="heading text-uppercase">Exercises</h2>
         </div>
       <div class="row no-gutters">
@@ -359,11 +359,11 @@ $gym_id=$rows['gym_id'];
     </div>
 
  <!-- trainer start -->
-        <div class="site-section bg-light">
+        <div class="site-section bg-light mb-1">
 
 <div class="container">
   
-  <div class="heading-with-border text-center mb-5">
+  <div class="heading-with-border text-center mb-1 mt-1">
     <h2 class="heading text-uppercase" style="font-size:22px;">Experts Trainer</h2>
   </div>   
   <div class="row">
@@ -418,7 +418,7 @@ else
 <div class="site-section">
       <div class="">
         <div class="row">
-          <div class="col-md-6 mx-auto text-center mb-5 section-heading heading-with-border ">
+          <div class="col-md-6 mx-auto text-center mb-2 section-heading heading-with-border ">
             <h2 class="mb-0 text-success" style="font-size:25px;">Our Gallery</h2>
           </div>
             
@@ -642,63 +642,6 @@ else
 <br>
 
 
-<section>    
-    
-    <footer class="site-footer">
-      <div class="container">
-        
-
-        <div class="row">
-          <div class="col-lg-7">
-            <div class="row">
-              <div class="col-6 col-md-4 col-lg-8 mb-5 mb-lg-0">
-                <h3 class="footer-heading mb-4 text-info">About</h3>
-                <p style="font-size: 18px;" class="text-success bg-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat quos rem ullam, placeat amet sint vel impedit reprehenderit eius expedita nemo consequatur obcaecati aperiam, blanditiis quia iste in! Assumenda, odio?</p>
-                <p><a href="#" class="btn btn-primary pill text-white px-4 btn-lg">Read More</a></p>
-              </div>
-              <div class="col-6 col-md-4 col-lg-4 mb-5 mb-lg-0">
-                <h3 class="footer-heading mb-4 text-info">Quick Menu</h3>
-                <ul class="list-unstyled">
-                  <li><a style="font-size: 18px;" class="text-success" href="#">About</a></li>
-                  <li><a style="font-size: 18px;" class="text-success" href="#">Plans</a></li>
-                  <li><a style="font-size: 18px;" class="text-success" href="#">Gallery</a></li>
-                  <li><a style="font-size: 18px;" class="text-success" href="#">Testimony</a></li>
-                  <li><a style="font-size: 18px;" class="text-success" href="#">Video</a></li>
-                  
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5">
-            <div class="row mb-5">
-              <div class="col-md-12"><h3 class="footer-heading mb-4 text-info">Contact Info</h3></div>
-              <div class="col-md-6">
-                <p class="text-success bg-light" style="font-size:18px;">New York - 2398 <br> 10 Hadson Carl Street</p>    
-              </div>
-              <div class="col-md-6 text-success bg-light" style="font-size:16px;">
-                Tel. + (123) 3240-345-9348 <br>
-                Mail. usa@youdomain.com
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-12"><h3 class="footer-heading mb-4 text-info">Social Icons</h3></div>
-              <div class="col-md-12">
-                <p>
-                  <a href="#" class="pb-2 pr-2 pl-0"><span class="icon-facebook" style="font-size:18px"></span></a>
-                  <a href="#" class="p-2"><span class="icon-twitter" style="font-size:18px"></span></a>
-                  <a href="#" class="p-2"><span class="icon-instagram" style="font-size:18px"></span></a>
-                  <a href="#" class="p-2"><span class="icon-vimeo" style="font-size:18px"></span></a>
-
-                </p>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-      
-      </div>
-    </footer>
   </div>
 
   <script src="js_view_gym/jquery-3.3.1.min.js"></script>
